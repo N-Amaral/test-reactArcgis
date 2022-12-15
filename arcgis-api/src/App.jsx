@@ -5,7 +5,19 @@ import MapView from "@arcgis/core/views/MapView";
 import WebMap from "@arcgis/core/WebMap";
 import "./App.css";
 
-function App() {
+function Text() {
+  return (
+    <div className="mapContainer">
+      <span>This is a text container</span>
+    </div>
+  );
+}
+
+function NavBar() {
+  return <nav>this is a nav</nav>;
+}
+
+function Map() {
   const mapDiv = useRef(null);
 
   useEffect(() => {
@@ -39,16 +51,24 @@ function App() {
 
       //extra - number of bookmarks in the webmap
       webmap.when(() => {
-        if (webmap.bookmarks && webmap.bookmarks.length) {
-          console.log(`This map has ${webmap.bookmarks.length} bookmarks`);
-        } else {
-          console.log("This map has no bookmarks available");
-        }
+        console.log(mapDiv.current);
       });
     }
   }, []);
 
-  return <div className="mapDiv" ref={mapDiv}></div>;
+  return <div className="mapDiv" ref={mapDiv} />;
+}
+
+function App() {
+  return (
+    <>
+      <NavBar />
+      <div style={{ height: "50%", display: "flex", justifyContent: "center", border: "2px solid black" }}>
+        <Map />
+      </div>
+      <Text />
+    </>
+  );
 }
 
 export default App;
